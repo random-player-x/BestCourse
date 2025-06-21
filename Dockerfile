@@ -16,9 +16,8 @@ COPY main.py .
 # Copy dependency files
 COPY requirements.txt .
 
-# ENV HUGGINGFACE_HUB_TOKEN='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'
 
-RUN huggingface-cli login --token $HUGGINGFACE_HUB_TOKEN
+# RUN huggingface-cli login --token $HUGGINGFACE_HUB_TOKEN
 
 
 
