@@ -20,7 +20,7 @@ from llama_index.core import (
 from llama_index.llms.huggingface import HuggingFaceLLM
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-# === Step 1: Load Documents ===
+
 data_dir = "app/data"
 persist_dir = "app/index_storage"
 
@@ -32,7 +32,7 @@ if not os.path.exists(persist_dir):
 else:
     print(f"📁 Found existing index in '{persist_dir}', skipping document load.")
 
-# === Step 2: Setup LLM ===
+
 system_prompt = """<|SYSTEM|> #
 You are my assistant who gives me details about my courses which I have provided in the form of .xlsx documents.
 """
@@ -55,11 +55,11 @@ llm = HuggingFaceLLM(
 Settings.llm = llm
 Settings.chunk_size = 1024
 
-# === Step 3: Embedding model ===
+
 embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 Settings.embed_model = embed_model
 
-# === Step 4: Build or Load Index ===
+
 if os.path.exists(os.path.join(persist_dir, "docstore.json")):
     print("📦 Loading existing index from storage...")
     storage_context = StorageContext.from_defaults(persist_dir=persist_dir)
@@ -70,7 +70,6 @@ else:
     index.storage_context.persist(persist_dir=persist_dir)
     print("✅ Index built and saved.")
 
-# === Step 5: Define Query Function ===
 def query_engine_response(query: str):
     query_engine = index.as_query_engine(streaming=False, similarity_top_k=1)
     response = query_engine.query(query)
