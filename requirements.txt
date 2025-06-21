@@ -1,0 +1,7 @@
+fastapi
+llama-index
+llama-index-embeddings-huggingface
+llama-index-llms-huggingface
+pydantic
+torch
+uvicorn
